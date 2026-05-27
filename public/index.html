@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EnglishST</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>EnglishST</h1>
+          <p>面向 CET6 / IELTS Academic 的阅读学习台</p>
+        </div>
+        <div class="target-strip" aria-label="learning targets">
+          <span>CET6</span>
+          <span>IELTS</span>
+          <span>Academic</span>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="collection controls">
+        <label>
+          难度
+          <select id="levelSelect">
+            <option value="CET6">CET6 / B2</option>
+            <option value="IELTS">IELTS / C1</option>
+            <option value="B1">B1 过渡</option>
+          </select>
+        </label>
+        <label>
+          内容
+          <select id="typeSelect">
+            <option value="all">新闻 + 小说</option>
+            <option value="news">新闻</option>
+            <option value="literature">小说</option>
+          </select>
+        </label>
+        <label>
+          主题
+          <select id="categorySelect">
+            <option value="all">全部主题</option>
+            <option value="politics">政治</option>
+            <option value="finance">财经</option>
+            <option value="technology">科技</option>
+            <option value="science">科学</option>
+            <option value="health">健康</option>
+            <option value="education">教育</option>
+            <option value="environment">环境</option>
+            <option value="culture">文化</option>
+            <option value="general">综合</option>
+          </select>
+        </label>
+        <label>
+          字数
+          <select id="minWordsSelect">
+            <option value="300">不少于 300 词</option>
+            <option value="500">不少于 500 词</option>
+            <option value="800">不少于 800 词</option>
+          </select>
+        </label>
+        <button id="collectButton" class="primary-button" title="持续收集文章并保存到本地资料库">
+          <span aria-hidden="true">↻</span>
+          收集文章
+        </button>
+        <button id="dailyPicksButton" title="精选 10 篇每日推荐">
+          <span aria-hidden="true">✦</span>
+          每日推荐
+        </button>
+        <button id="exportButton" title="导出生词 CSV">
+          <span aria-hidden="true">↓</span>
+          导出生词
+        </button>
+        <button id="bookmarkToggle" title="仅显示已收藏文章">
+          <span aria-hidden="true">★</span>
+          收藏
+        </button>
+        <div class="search-box">
+          <input id="searchInput" type="search" placeholder="搜索标题、来源或正文" />
+        </div>
+      </section>
+
+      <main class="workspace">
+        <aside class="library-panel" aria-label="article library">
+          <div class="panel-heading">
+            <h2>文章库</h2>
+            <span id="articleCount">0</span>
+          </div>
+          <div class="read-tabs" id="readTabs">
+            <button class="read-tab active" data-filter="all">全部</button>
+            <button class="read-tab" data-filter="unread">未读 <span class="badge" id="unreadBadge">0</span></button>
+            <button class="read-tab" data-filter="read">已读</button>
+          </div>
+          <div id="articleList" class="article-list"></div>
+        </aside>
+
+        <section class="reader-panel" aria-label="reader">
+          <div class="reader-meta">
+            <div>
+              <p id="readerSource">选择一篇文章开始</p>
+              <h2 id="readerTitle">阅读区</h2>
+            </div>
+            <div class="difficulty-meter">
+              <span id="readerLevel">--</span>
+              <meter id="readerScore" min="35" max="95" value="35"></meter>
+            </div>
+          </div>
+          <article id="readerText" class="reader-text">
+            选择文章开始阅读。
+          </article>
+          <div id="translationPopup" class="translation-popup" hidden>
+            <div class="popup-word" id="popupWord"></div>
+            <div class="popup-meaning" id="popupMeaning">查询中...</div>
+            <div class="popup-source" id="popupSource"></div>
+            <textarea id="popupNote" rows="2" placeholder="补充中文释义、搭配或记忆提示"></textarea>
+            <div class="popup-actions">
+              <button id="saveWordButton" class="primary-button">加入生词本</button>
+              <button id="closePopupButton">关闭</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="vocab-panel" aria-label="vocabulary">
+          <div class="panel-heading">
+            <h2>生词本</h2>
+            <span id="wordCount">0</span>
+          </div>
+          <div class="vocab-tools">
+            <button id="clearKnownButton" title="仅清除本地生词记录">清空</button>
+          </div>
+          <div id="vocabList" class="vocab-list"></div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
